@@ -1,0 +1,34 @@
+/* Credits Page */
+
+/* Tags */
+.tag {
+    margin-right: 3px;
+}
+
+.tag-pm {
+    background-color: #D7342A;
+}
+
+.tag-hd {
+    background-color: #FF5252;
+}
+
+.tag-dev {
+    background-color: #FF6E40;
+}
+
+.tag-gra {
+    background-color: #18FFFF;
+}
+
+.tag-qa {
+    background-color: #F1C40F;
+}
+
+.tag-gm {
+    background-color: #9B59B6;
+}
+
+.tag-sup {
+    background-color: #69F0AE;
+}

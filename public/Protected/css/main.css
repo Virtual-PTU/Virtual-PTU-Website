@@ -1,0 +1,15 @@
+.profile-pic {
+    max-width: 200px;
+    max-height: 200px;
+    margin-right: 10px;
+}
+
+.profile-pic-list {
+    max-width: 80px;
+    max-height: 80px;
+}
+
+.profile-button-list {
+    max-width: 24px;
+    max-height: 24px;
+}
