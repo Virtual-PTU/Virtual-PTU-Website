@@ -1,0 +1,264 @@
+body, html {
+    height: 100%;
+
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: url(../img/dust-scratches.png);
+}
+
+::selection {
+    background: #71c13f;
+    color: white;
+    text-shadow: none;
+ }
+::-moz-selection {
+    background: #71c13f;
+    color: white;
+}
+
+nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+
+    padding: 1em;
+
+    background: #0f0c24ee;
+    border-bottom: 1px solid #71c13f;
+
+    z-index: 99999;
+}
+
+nav, nav * {
+    transition: 150ms ease-out;
+}
+
+nav.scrolled {
+    padding: .6em 1em;
+}
+
+nav .title {
+    display: inline-block;
+}
+nav.scrolled .title {
+    font-size: .8em;
+}
+
+nav .title a {
+    font-family: "Patua One", serif;
+    font-weight: 400;
+    font-size: 1.7em;
+    text-decoration: none;
+
+    color: #f1f9fe;
+
+    position: relative;
+    left: 0;
+}
+nav .title a:hover {
+    left: 2em;
+}
+
+nav .title a .logo {
+    opacity: 0;
+
+    width: 1.7em;
+    height: 1.7em;
+
+    position: fixed;
+    top: .9em;
+    left: .35em;
+
+    transform: scale(0.7);
+}
+nav .title a:hover .logo {
+    opacity: 1;
+    transform: scale(1);
+}
+nav.scrolled .title a .logo {
+    top: .45em;
+}
+
+nav .links {
+    display: inline-block;
+
+    margin-left: 5em;
+
+    font-family: Montserrat, sans-serif;
+}
+
+nav .links a {
+    display: inline-block;
+
+    color: #f1f9fe;
+    font-size: 1.3em;
+    text-decoration: none;
+
+    padding: 1em;
+}
+nav .links a.current {
+    color: #71c13f;
+}
+nav .links a:not(:last-child) {
+    border-right: 1px solid #71c13f;
+}
+
+nav .links a:first-child {
+    border-top-left-radius:    2px;
+    border-bottom-left-radius: 2px;
+}
+
+nav .links a:last-child {
+    border-top-right-radius:    2px;
+    border-bottom-right-radius: 2px;
+}
+
+nav.scrolled .links a {
+    padding: .2em .4em;
+
+    border-radius: 2px;
+    border-color: transparent;
+
+    margin-right: .4em;
+
+    color: #b7b7b7;
+}
+nav.scrolled .links a.current {
+    color: white;
+}
+nav .links a:hover {
+    background: #5da336;
+    color: #f1f9fe;
+}
+
+.jumbotron {
+    margin-left: 4em;
+    margin-top: 4em;
+    margin-bottom: 4em;
+
+    padding: 2em 1.4em;
+
+    width: calc(100% - 8em - 2.8em);
+
+    background: #4733cd;
+    color: white;
+
+    font-size: 1.5em;
+
+    border-radius: 3px;
+}
+
+.credits {
+    margin-left: 7em;
+    width: calc(100% - 14em);
+    border-radius: 3px;
+    background: #f3faff;
+}
+
+.credits .credit {
+    padding: 2em;
+    color: #130f40;
+    text-align: center;
+}
+.credits .credit:not(:last-child) {
+    border-bottom: 1px solid #dfe7ec;
+}
+
+.tag {
+    display: inline-block;
+    padding: .4em;
+    font-weight: 700;
+    border-radius: 2px;
+
+    background: #5da336;
+    color: white;
+}
+
+.tag.project-manager {
+    background: #d7342a;
+}
+.tag.project-manager::after {
+    content: "Project Manager";
+}
+.tag.head-developer {
+    background: #ff5252;
+}
+.tag.head-developer::after {
+    content: "Head Developer";
+}
+.tag.developer {
+    background: #ff6e40;
+}
+.tag.developer::after {
+    content: "Developer";
+}
+.tag.debug-qa {
+    background: #f1c40f;
+}
+.tag.debug-qa::after {
+    content: "Debug and QA";
+}
+.tag.graphics {
+    background: #18ffff;
+}
+.tag.graphics::after {
+    content: "Graphics";
+}
+.tag.game-master-advice {
+    background: #9b59b6;
+}
+.tag.game-master-advice::after {
+    content: "Game-Master Advice";
+}
+.tag.support {
+    background: #69f0ae;
+}
+.tag.support::after {
+    content: "Support";
+}
+
+.link {
+    display: inline-block;
+
+    width: 32px;
+    height: 32px;
+
+    border-radius: 2px;
+
+    background: no-repeat center center;
+}
+
+.link.github {
+    background-image: url(../img/icons/github.png);
+}
+
+.link.forums {
+    background-image: url(../img/icons/forums.png);
+}
+
+.link.youtube {
+    background-image: url(../img/icons/youtube.png);
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 400;
+    font-family: "Patua One", serif;
+
+    text-align: center;
+}
+
+p {
+    font-family: Montserrat, sans-serif;
+}
+
+small {
+    opacity: .65;
+}
+
+a {
+    color: #71c13f;
+}
