@@ -20,7 +20,8 @@ Created by AssultBird2454, edited by zoweb
     <section class="links">
            <a href="credits.html" class="current">Credits</a><!--
         --><a href="features.html">Features</a><!--
-        --><a href="docs">Documentation</a>
+        --><a href="docs">Documentation</a><!--
+        --><a href="https://github.com/AssaultBird2454/Virtual-Pokemon-Tabletop/releases">Download</a>
     </section>
 </nav>
 
@@ -29,40 +30,44 @@ Created by AssultBird2454, edited by zoweb
 <section class="jumbotron">
     <h1>Credits</h1>
     <p>This project wasn't one-man like I thought it would be. Here's the other people who've worked on VPTU with me.</p>
-    <p><small>Note: I may be missing some people, if you've contibuted please <a href="mailto:example@example.com">tell me</a>.</small></p>
+    <p><small>Note: I may be missing some people, if you've contributed please add yourself on Github or
+        <a href="mailto:example@example.com">tell me</a>. Also, note that the people below's changes might not have
+    been released yet.</small></p>
 </section>
 
-<section class="credits">
-    <section class="credit">
-        <h2><a data-folder="users">AssualtBird2454</a></h2>
-        <p>Head dev of VPTU. Started development in mid 2016 and publicised the project in early 2017.</p>
-        <p>
-            <span class="tag project-manager"></span>
-            <span class="tag head-developer"></span>
-            <span class="tag debug-qa"></span>
-            <span class="tag support"></span>
-        </p>
-        <p>
-            <a href="https://github.com/AssaultBird2454" class="link github"></a>
-            <a href="http://forums.pokemontabletop.com/profile/6000923/" class="link forums"></a>
-            <a href="https://www.youtube.com/channel/UCXqpxzR-2HYqaHpgtqOAFFg" class="link youtube"></a>
-        </p>
+<section class="credits"></section>
+
+<footer>
+    <section class="header">Virtual PTU by AssaultBird2454 and other contributors</section>
+    <section class="grid">
+        <section>
+            <p><a href="https://virtual-ptu.com">Home</a></p>
+            <p><a href="https://github.com/AssaultBird2454/Virtual-Pokemon-Tabletop">Github</a></p>
+            <p><a href="https://github.com/AssaultBird2454/Virtual-Pokemon-Tabletop/graphs/contributors">Contributors (code)</a></p>
+            <p><a href="credits.html">Contributors (all)</a></p>
+        </section>
+        <section>
+            <p><a href="about.html">About</a></p>
+            <p><a href="about.html#why">Why</a></p>
+            <p><a href="about.html#who">Who</a></p>
+            <p><a href="mailto:tasman@virtual-ptu.com">Contact</a></p>
+        </section>
     </section>
-    <section class="credit">
-        <h2>Someone's name</h2>
-        <p>A quick description. Don't use any names</p>
-        <p>
-            <span class="tag developer"></span>
-        </p>
-        <p>
-            <a href="https://github.com/name" class="link github"></a>
-            <a href="http://forums.pokemontabletop.com/profile/id/" class="link forums"></a>
-            <a href="https://www.youtube.com/channel/youtube" class="link youtube"></a>
-        </p>
-    </section>
-</section>
+    <section class="footer">Website design by zoweb &copy; <span id="copyright-year">2018</span></section>
+</footer>
+
+<template id="credit-template">
+    <h2 class="username"></h2>
+    <p class="short-description"></p>
+    <p class="tags"></p>
+    <p class="links"></p>
+</template>
 
 <script src="js/attr-data-folder.js"></script>
 <script src="js/nav.js"></script>
+<script src="js/footer.js"></script>
+
+<script src="js/contributors.js"></script>
+<script src="https://rawgit.com/AssaultBird2454/Virtual-Pokemon-Tabletop/Dev/contributors.js"></script>
 </body>
 </html>
