@@ -1,5 +1,5 @@
 body, html {
-    height: 100%;
+    min-height: 100vh;
 
     margin: 0;
     padding: 0;
@@ -140,9 +140,9 @@ nav .links a:hover {
     margin-top: 4em;
     margin-bottom: 4em;
 
-    padding: 2em 1.4em;
+    padding: 1.4em 2em;
 
-    width: calc(100% - 8em - 2.8em);
+    width: calc(100% - 8em - 4em);
 
     background: #4733cd;
     color: white;
@@ -153,9 +153,13 @@ nav .links a:hover {
 }
 
 .credits {
-    margin-left: 7em;
-    width: calc(100% - 14em);
+    margin-left: 14em;
+    margin-bottom: 14em;
+
+    width: calc(100% - 28em);
+
     border-radius: 3px;
+
     background: #f3faff;
 }
 
@@ -170,12 +174,17 @@ nav .links a:hover {
 
 .tag {
     display: inline-block;
-    padding: .4em;
     font-weight: 700;
     border-radius: 2px;
 
+    padding: .4em;
+    margin-bottom: .3em;
+
     background: #5da336;
     color: white;
+}
+.tag::after {
+    content: "(Unknown Tag)";
 }
 
 .tag.project-manager {
@@ -261,4 +270,116 @@ small {
 
 a {
     color: #71c13f;
+}
+
+footer {
+    background: #130f40;
+    font-size: .7em;
+    color: #039be5;
+
+    width: calc(100% - 2.8em);
+    padding: 2em 1.4em;
+
+    font-family: Montserrat, serif;
+}
+footer .header {
+    font-family: "Patua One", serif;
+    font-size: 1.3em;
+    text-align: center;
+}
+footer .footer {
+    text-align: center;
+}
+footer .grid {
+    display: grid;
+    grid: repeat(1, 1fr) / auto-flow 1fr;
+
+    width: 20%;
+    margin-left: auto;
+    margin-right: auto;
+
+    text-align: center;
+}
+
+@media only screen and (max-width: 1035px) and (min-width: 839px) {
+    nav, nav * {
+        transition: none;
+    }
+
+    nav:not(.scrolled) .title {
+        display: block;
+        width: 100%;
+
+        text-align: center;
+    }
+    nav:not(.scrolled) .title a:hover {
+        left: 0;
+    }
+    nav:not(.scrolled) .title a:hover .logo {
+        opacity: 0;
+    }
+
+    nav:not(.scrolled) .links {
+        width: 100%;
+        margin: 1.2em 0 0;
+    }
+    nav:not(.scrolled) .links a {
+        width: calc(25% - 1px);
+        padding: 1em 0;
+        text-align: center;
+    }
+}
+
+@media only screen and (max-width: 907px) and (min-width: 839px) {
+    nav, nav * {
+        transition: none;
+    }
+
+    nav.scrolled .title {
+        display: block;
+        width: 100%;
+
+        text-align: center;
+    }
+    nav.scrolled .title a:hover {
+        left: 0;
+    }
+    nav.scrolled .title a:hover .logo {
+        opacity: 0;
+    }
+
+    nav.scrolled .links {
+        margin: 1.2em 0 0;
+    }
+}
+
+@media only screen and (max-width: 838px) {
+    nav .links {
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 800px) {
+    footer .grid {
+        width: 50%;
+    }
+}
+
+@media only screen and (max-width: 900px) {
+    .jumbotron {
+        text-align: justify;
+    }
+
+    .credits {
+        margin-left: 0;
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .jumbotron {
+        width: calc(100% - 4em);
+        border-radius: 0;
+        margin: 0;
+    }
 }
