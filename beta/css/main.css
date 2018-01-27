@@ -236,6 +236,65 @@ nav .links a:hover {
     content: "Donator";
 }
 
+
+.alerts-sidebar {
+    position: fixed;
+
+    top: 25vh;
+    right: 0;
+
+    visibility: hidden;
+
+    width: 20vw;
+}
+
+.alert {
+    padding: .7em;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+
+    color: black;
+    font-family: Montserrat, sans-serif;
+
+    margin-bottom: 0.2em;
+    position: relative;
+
+    animation: swipe-in-fade-out 15s ease-in-out;
+}
+
+.danger {
+    background: #f27379;
+}
+.warning {
+    background: #fcf875;
+}
+.info {
+    background: #77eff7;
+}
+.success {
+    background: #7af068;
+}
+
+@keyframes swipe-in-fade-out {
+    0% {
+        visibility: visible;
+        opacity: 0;
+        left: 20vw;
+    }
+    5% {
+        opacity: 1;
+        left: 0;
+    }
+
+    75% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+
 .link {
     display: inline-block;
 
@@ -321,7 +380,7 @@ footer .grid {
     color: black;
 }
 
-@media only screen and (max-width: 1035px) and (min-width: 839px) {
+@media only screen and (max-width: 1099px) and (min-width: 839px) {
     nav, nav * {
         transition: none;
     }
