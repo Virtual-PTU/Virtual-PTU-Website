@@ -17,5 +17,5 @@
         }
     });
 
-    document.querySelector("#title").addEventListener("click", titleClick);
+    if (document.querySelector("#title") !== null) document.querySelector("#title").addEventListener("click", titleClick);
 }());
