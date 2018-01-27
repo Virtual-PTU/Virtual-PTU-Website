@@ -244,6 +244,7 @@ nav .links a:hover {
     right: 0;
 
     visibility: hidden;
+    z-index: 99999;
 
     width: 20vw;
 }
@@ -252,6 +253,7 @@ nav .links a:hover {
     padding: .7em;
     border-top-left-radius: 3px;
     border-bottom-left-radius: 3px;
+    border: 1px inset #0003;
 
     color: black;
     font-family: Montserrat, sans-serif;
