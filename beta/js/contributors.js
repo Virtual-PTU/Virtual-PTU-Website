@@ -2,6 +2,19 @@ function initContributors(users) {
     const $credits = document.querySelector(".credits"),
         $template = document.getElementById("credit-template");
 
+    $credits.textContent = "";
+
+    users.unshift({
+        username: "You",
+
+        shortDescription: "We couldn't have made this without the help of our donators. So, thankyou! (if you haven't donated pls do)",
+
+        tags: [
+            "donator"
+        ],
+        links: {}
+    });
+
     users.forEach(user => {
         $template.content.querySelector(".username").textContent = `${user.username}` + (user.firstName ? ` (${user.firstName})` : "");
 
