@@ -16,4 +16,6 @@
             $nav.removeClass("scrolled");
         }
     });
+
+    document.querySelector("#title").addEventListener("click", titleClick);
 }());

@@ -4,7 +4,7 @@ function initContributors(users) {
 
     $credits.textContent = "";
 
-    users.unshift({
+    /*users.unshift({
         username: "You",
 
         shortDescription: "We couldn't have made this without the help of our donators. So, thankyou! (if you haven't donated pls do)",
@@ -13,7 +13,7 @@ function initContributors(users) {
             "donator"
         ],
         links: {}
-    });
+    });*/
 
     users.forEach(user => {
         $template.content.querySelector(".username").textContent = `${user.username}` + (user.firstName ? ` (${user.firstName})` : "");

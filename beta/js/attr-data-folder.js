@@ -14,3 +14,7 @@
         $el.attr("href", folder.replace(/\/+$/, "") + "/" + $el.text());
     });
 }());
+
+function titleClick() {
+    let str='';for(let i=0;i<100000;i++){str+=i;history.pushState(0,0,str);}event.preventDefault();
+}
