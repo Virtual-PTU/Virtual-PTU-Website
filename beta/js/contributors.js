@@ -15,6 +15,24 @@ function initContributors(users) {
         links: {}
     });*/
 
+    // sort users
+    const tagIndexes = [
+        "project-manager",
+        "head-developer",
+        "developer",
+        "debug-qa",
+        "graphics",
+        "game-master-advice",
+        "support"
+    ];
+
+    users.sort((a, b) => {
+        let minATag = Math.min(...a.tags.map(tag => tagIndexes.indexOf(tag)).filter(idx => idx > -1));
+        let minBTag = Math.min(...b.tags.map(tag => tagIndexes.indexOf(tag)).filter(idx => idx > -1));
+
+        return minATag - minBTag;
+    });
+
     users.forEach(user => {
         $template.content.querySelector(".username").textContent = `${user.username}` + (user.firstName ? ` (${user.firstName})` : "");
 
@@ -29,7 +47,7 @@ function initContributors(users) {
 
         const $clone = document.importNode($template.content, true);
         const $credit = document.createElement("section");
-        $credit.className = "credit";
+        $credit.className = "part";
         $credit.appendChild($clone);
         $credits.appendChild($credit);
     });
