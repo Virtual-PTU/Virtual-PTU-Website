@@ -6,5 +6,5 @@
  */
 
 (function() {
-    document.querySelector("#copyright-year").textContent = new Date().getFullYear();
+	Array.from(document.querySelectorAll(".copyright-year")).forEach(el => el.textContent = new Date().getFullYear());
 }());
