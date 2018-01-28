@@ -32,6 +32,15 @@ Created by AssultBird2454, edited by zoweb
 <section class="content padded current-doc">
     <p>Please wait, the page is loading.</p>
 </section>
+<section class="sidebar docs-sidebar">
+    <p>
+        <input type="radio" id="dev-latest" name="version-option" /><label for="dev-latest">Lastest (Developer)</label><br/>
+        <input type="radio" id="alpha-latest" name="version-option" /><label for="alpha-latest">Lastest (Alpha)</label><br/>
+        <input type="radio" id="beta-latest" name="version-option" checked/><label for="beta-latest">Lastest (Beta)</label><br/>
+        <input type="radio" id="release-latest" name="version-option" disabled/><label for="release-latest">Lastest (Release)</label><br/>
+        <input type="radio" id="choose-version" name="version-option" /><label for="choose-version"><select id="select-version" disabled></select></label>
+    </p>
+</section>
 
 <footer>
     <section class="header">Virtual PTU &copy; <span class="copyright-year">2018</span> AssaultBird2454 and other contributors</section>
@@ -52,15 +61,12 @@ Created by AssultBird2454, edited by zoweb
     <section class="footer">Website design by zoweb &copy; <span class="copyright-year">2018</span></section>
 </footer>
 
-<script src="../js/attr-data-folder.js"></script>
-<script src="../js/nav.js"></script>
-<script src="../js/footer.js"></script>
-
-<script src="https://www.gstatic.com/firebasejs/4.9.0/firebase.js"></script>
-<script src="../js/auth.js"></script>
-<script src="../js/global-announcements.js"></script>
-
-<script src="../js/markdown.js"></script>
-<script src="../js/docs.js"></script>
+<script src="/js/init.js"></script>
+<script>
+    onScriptLoadComplete = async function() {
+        loadScript("/js/markdown.js");
+        loadScript("/js/docs.js");
+    };
+</script>
 </body>
 </html>
