@@ -1,7 +1,73 @@
 (async function() {
-    const updateInfo = (await firebase.database().ref("/Software/Update_Info").once("value")).val();
+    const updateInfo = {
+        versions: (await firebase.database().ref("/Software/Update_Info/Versions").once("value")).val(),
+        latestVersion: (await firebase.database().ref("/Software/Update_Info/Latest_Version").once("value")).val(),
+        latestVersionAlpha: (await firebase.database().ref("/Software/Update_Info/Latest_Version_Alpha").once("value")).val(),
+        latestVersionBeta: (await firebase.database().ref("/Software/Update_Info/Latest_Version_Beta").once("value")).val(),
+        latestVersionMaster: (await firebase.database().ref("/Software/Update_Info/Latest_Version_Master").once("value")).val(),
+        oldestVersionAllowed: (await firebase.database().ref("/Software/Update_Info/Oldest_Version_Allowed").once("value")).val()
+    };
     const $currentDoc = document.querySelector(".current-doc");
     const $title = document.querySelector("title");
+
+    let selectedVersion = updateInfo.latestVersion;
+
+    // Add versions to list
+    const $versionList = document.getElementById("select-version");
+    updateInfo.versions.reverse();
+    updateInfo.versions.forEach(version => {
+        let $el = document.createElement("option");
+        $el.value = version.Build_ID;
+        $el.textContent = version.Version_Name;
+
+        if (version.Build_ID === updateInfo.oldestVersionAllowed - 1) {
+            let $dotDotDot = document.createElement("option");
+            $dotDotDot.disabled = true;
+            $dotDotDot.innerHTML = "<strong>--- BELOW ARE DEPRECATED ---</strong>";
+            $versionList.appendChild($dotDotDot);
+        }
+
+        //if (version.Build_ID === updateInfo.latestVersion) $el.selected = true;
+
+        $versionList.appendChild($el);
+    });
+    updateInfo.versions.reverse();
+    $versionList.addEventListener("change", async () => {
+        selectedVersion = parseInt($versionList.value);
+        await loadFromVersion(selectedVersion, location.hash.substr(1));
+
+        if (parseInt($versionList.value) < updateInfo.oldestVersionAllowed) {
+            let $warning = document.createElement("h1");
+            $warning.className = "danger-text";
+            $warning.textContent = "This version is deprecated.";
+            $currentDoc.insertBefore($warning, $currentDoc.firstChild);
+        }
+    });
+
+    let versionOptions = Array.from(document.querySelectorAll("[name=version-option]"));
+    versionOptions.forEach($el => {
+        $el.addEventListener("change", async () => {
+            console.log($el.id);
+            if ($el.checked && $el.id !== "choose-version") {
+                switch ($el.id) {
+                    case "dev-latest":
+                        selectedVersion = "Dev";
+                        break;
+                    case "alpha-latest":
+                        selectedVersion = updateInfo.latestVersionAlpha;
+                        break;
+                    case "beta-latest":
+                        selectedVersion = updateInfo.latestVersionBeta;
+                        break;
+                    case "master-latest":
+                        selectedVersion = updateInfo.latestVersionMaster;
+                        break;
+                }
+                console.log(selectedVersion);
+                await loadFromVersion(selectedVersion, location.hash.substr(1));
+            }
+        });
+    });
 
     function replaceYoutube(tree, parent) {
         let sectionName = tree[0];
@@ -47,8 +113,8 @@
         tree.slice(1).forEach(el => replaceYoutube(el, tree));
     }
 
-    async function loadFromVersion(version, fileName) {
-        let versionData = updateInfo.Versions[parseInt(version)];
+    async function loadFromVersion(version, fileName, isBranchName = false) {
+        let versionData = isBranchName ? {Commit_Id: version} : updateInfo.versions[parseInt(version)];
 
         let dotCount = 2, dotState = false;
         let interval = setInterval(() => {
@@ -78,8 +144,10 @@
         // load file from Github
         let response;
         try {
-            response = await Promise.resolve($.get(`https://rawgit.com/AssaultBird2454/Virtual-Pokemon-Tabletop/${"Dev_Zoweb" || versionData.Commit_ID}/docs/${fileName}`));
-        } catch {
+            response = await Promise.resolve($.get(`https://rawgit.com/AssaultBird2454/Virtual-Pokemon-Tabletop/${versionData.Commit_ID}/docs/${fileName}`));
+            //   ||
+            //   v CHROME IS STUPID
+        } catch (e) {
             response = `# 404 Page Not Found
 #### oh whatever you know what \`404\` means...
 
@@ -106,8 +174,6 @@ If it was the last one, why were you typing it into the URL? Use the selector to
 
         $title.textContent = title + " | Virtual PTU";
     }
-
-    let selectedVersion = updateInfo.Latest_Version;
 
     if (window.location.hash.length <= 1) window.location.hash = "/index";
     await loadFromVersion(selectedVersion, window.location.hash.substr(1));
