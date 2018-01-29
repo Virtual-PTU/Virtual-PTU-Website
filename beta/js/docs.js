@@ -47,24 +47,25 @@
     let versionOptions = Array.from(document.querySelectorAll("[name=version-option]"));
     versionOptions.forEach($el => {
         $el.addEventListener("change", async () => {
-            console.log($el.id);
             if ($el.checked && $el.id !== "choose-version") {
+                $versionList.disabled = true;
                 switch ($el.id) {
                     case "dev-latest":
                         selectedVersion = "Dev";
                         break;
                     case "alpha-latest":
-                        selectedVersion = updateInfo.latestVersionAlpha;
+                        selectedVersion = "Alpha";
                         break;
                     case "beta-latest":
-                        selectedVersion = updateInfo.latestVersionBeta;
+                        selectedVersion = "Beta";
                         break;
                     case "master-latest":
-                        selectedVersion = updateInfo.latestVersionMaster;
+                        selectedVersion = "Master";
                         break;
                 }
-                console.log(selectedVersion);
-                await loadFromVersion(selectedVersion, location.hash.substr(1));
+                await loadFromVersion(selectedVersion, location.hash.substr(1), true);
+            } else {
+                $versionList.disabled = null;
             }
         });
     });
@@ -114,7 +115,7 @@
     }
 
     async function loadFromVersion(version, fileName, isBranchName = false) {
-        let versionData = isBranchName ? {Commit_Id: version} : updateInfo.versions[parseInt(version)];
+        let versionData = isBranchName ? {Commit_ID: version} : updateInfo.versions[parseInt(version)];
 
         let dotCount = 2, dotState = false;
         let interval = setInterval(() => {
