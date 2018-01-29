@@ -8,6 +8,7 @@
 const gulp = require("gulp"),
     imagemin = require("gulp-imagemin"),
     uglify = require("gulp-uglify"),
+    babel = require("gulp-babel"),
     cleancss = require("gulp-clean-css"),
     del = require("del");
 
@@ -19,6 +20,7 @@ gulp.task("clean", function() {
 gulp.task("scripts", ["clean"], function() {
     // Mininify all JS
     return gulp.src("beta/js/**/*.js")
+        .pipe(babel({presets: ["env"]}))
         .pipe(uglify())
         .pipe(gulp.dest("build/js"));
 });

@@ -51,3 +51,5 @@ crashlytics-build.properties
 fabric.properties
 
 /codealike.json
+/build/
+/node_modules/
