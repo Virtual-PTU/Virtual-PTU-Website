@@ -32,17 +32,22 @@
         $versionList.appendChild($el);
     });
     updateInfo.versions.reverse();
-    $versionList.addEventListener("change", async () => {
+    $versionList.addEventListener("change", () => {
         selectedVersion = parseInt($versionList.value);
+        loadVersionWithDeprecatedMessage(selectedVersion);
+    });
+
+    async function loadVersionWithDeprecatedMessage(version) {
         await loadFromVersion(selectedVersion, location.hash.substr(1));
 
-        if (parseInt($versionList.value) < updateInfo.oldestVersionAllowed) {
+        if (version < updateInfo.oldestVersionAllowed) {
             let $warning = document.createElement("h1");
             $warning.className = "danger-text";
-            $warning.textContent = "This version is deprecated.";
+            $warning.innerHTML = "<em>Warning</em>: This version is no longer supported!";
+
             $currentDoc.insertBefore($warning, $currentDoc.firstChild);
         }
-    });
+    }
 
     let versionOptions = Array.from(document.querySelectorAll("[name=version-option]"));
     versionOptions.forEach($el => {
@@ -65,6 +70,7 @@
                 }
                 await loadFromVersion(selectedVersion, location.hash.substr(1), true);
             } else {
+                await loadVersionWithDeprecatedMessage(parseInt($versionList.value));
                 $versionList.disabled = null;
             }
         });
@@ -178,6 +184,7 @@ If it was the last one, why were you typing it into the URL? Use the selector to
 
     if (window.location.hash.length <= 1) window.location.hash = "/index";
     await loadFromVersion(selectedVersion, window.location.hash.substr(1));
+    document.body.removeAttribute("class");
 
     window.addEventListener("hashchange", async () => {
         if (window.location.hash.length <= 1) window.location.hash = "/index";

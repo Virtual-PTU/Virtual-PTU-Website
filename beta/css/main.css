@@ -7,6 +7,7 @@ body, html {
 
 body {
     background: url(../img/dust-scratches.png);
+    transition: 150ms;
 }
 
 ::selection {
@@ -179,6 +180,7 @@ nav .links a:hover {
 
 .current-doc {
     width: calc(calc(100% - 32em) *  0.6321205588285577) !important;
+    transition: 150ms ease;
 }
 .docs-sidebar {
     width: calc(calc(100% - 4em) * 0.36787944117144233);
@@ -412,6 +414,11 @@ footer .grid {
 .jumbotron.transparent-black {
     background: transparent;
     color: black;
+}
+
+.loading {
+    filter: blur(20px);
+    opacity: .5;
 }
 
 @media only screen and (max-width: 1099px) and (min-width: 839px) {
