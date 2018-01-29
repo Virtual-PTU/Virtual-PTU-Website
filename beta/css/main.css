@@ -177,6 +177,20 @@ nav .links a:hover {
     border-bottom: 1px solid #dfe7ec;
 }
 
+.current-doc {
+    width: calc(calc(100% - 32em) *  0.6321205588285577) !important;
+}
+.docs-sidebar {
+    width: calc(calc(100% - 4em) * 0.36787944117144233);
+    padding: 1em;
+
+    position: fixed;
+    right: 0;
+    top: 8em;
+
+    background: #f3faff;
+}
+
 .tag {
     display: inline-block;
     font-weight: 700;
@@ -245,7 +259,7 @@ nav .links a:hover {
 .alerts-sidebar {
     position: fixed;
 
-    top: 25vh;
+    top: 8em;
     right: 0;
 
     visibility: hidden;
@@ -280,6 +294,19 @@ nav .links a:hover {
 }
 .success {
     background: #7af068;
+}
+
+.danger-text {
+    color: #f27379;
+}
+.warning-text {
+    color: #fcf875;
+}
+.info-text {
+    color: #77eff7;
+}
+.success-text {
+    color: #7af068;
 }
 
 @keyframes swipe-in-fade-out {
