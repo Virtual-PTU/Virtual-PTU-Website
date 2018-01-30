@@ -1,0 +1,505 @@
+body, html {
+    min-height: 100vh;
+
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: url(../img/dust-scratches.png);
+    transition: 150ms;
+}
+
+::selection {
+    background: #71c13f;
+    color: white;
+    text-shadow: none;
+ }
+::-moz-selection {
+    background: #71c13f;
+    color: white;
+}
+
+nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+
+    padding: 1em;
+
+    background: #0f0c24ee;
+    border-bottom: 1px solid #71c13f;
+
+    z-index: 99999;
+}
+
+nav, nav * {
+    transition: 150ms ease-out;
+}
+
+nav.scrolled {
+    padding: .6em 1em;
+}
+
+nav .title {
+    display: inline-block;
+}
+nav.scrolled .title {
+    font-size: .8em;
+}
+
+nav .title a {
+    font-family: "Patua One", serif;
+    font-weight: 400;
+    font-size: 1.7em;
+    text-decoration: none;
+
+    color: #f1f9fe;
+
+    position: relative;
+    left: 0;
+}
+nav .title a:hover {
+    left: 2em;
+}
+
+nav .title a .logo {
+    opacity: 0;
+
+    width: 1.7em;
+    height: 1.7em;
+
+    position: fixed;
+    top: .9em;
+    left: .35em;
+
+    transform: scale(0.7);
+}
+nav .title a:hover .logo {
+    opacity: 1;
+    transform: scale(1);
+}
+nav.scrolled .title a .logo {
+    top: .45em;
+}
+
+nav .links {
+    display: inline-block;
+
+    margin-left: 5em;
+
+    font-family: Montserrat, sans-serif;
+}
+
+nav .links a {
+    display: inline-block;
+
+    color: #f1f9fe;
+    font-size: 1.3em;
+    text-decoration: none;
+
+    padding: 1em;
+}
+nav .links a.current {
+    color: #71c13f;
+}
+nav .links a:not(:last-child) {
+    border-right: 1px solid #71c13f;
+}
+
+nav .links a:first-child {
+    border-top-left-radius:    2px;
+    border-bottom-left-radius: 2px;
+}
+
+nav .links a:last-child {
+    border-top-right-radius:    2px;
+    border-bottom-right-radius: 2px;
+}
+
+nav.scrolled .links a {
+    padding: .2em .4em;
+
+    border-radius: 2px;
+    border-color: transparent;
+
+    margin-right: .4em;
+
+    color: #b7b7b7;
+}
+nav.scrolled .links a.current {
+    color: white;
+}
+nav .links a:hover {
+    background: #5da336;
+    color: #f1f9fe;
+}
+
+.jumbotron {
+    margin-left: 4em;
+    margin-top: 4em;
+    margin-bottom: 4em;
+
+    padding: 1.4em 2em;
+
+    width: calc(100% - 8em - 4em);
+
+    background: #4733cd;
+    color: white;
+
+    font-size: 1.5em;
+
+    border-radius: 3px;
+}
+
+.content {
+    margin-left: 14em;
+    margin-bottom: 14em;
+
+    width: calc(100% - 28em);
+
+    border-radius: 3px;
+
+    background: #f3faff;
+}
+
+.content.padded {
+    padding: 2em;
+    width: calc(100% - 32em);
+}
+
+.content .part {
+    padding: 2em;
+    color: #130f40;
+    text-align: center;
+}
+.content .part:not(:last-child) {
+    border-bottom: 1px solid #dfe7ec;
+}
+
+.current-doc {
+    width: calc(calc(100% - 32em) *  0.6321205588285577) !important;
+    transition: 150ms ease;
+}
+.docs-sidebar {
+    width: calc(calc(100% - 4em) * 0.36787944117144233);
+    padding: 1em;
+
+    position: fixed;
+    right: 0;
+    top: 8em;
+
+    background: #f3faff;
+}
+
+.tag {
+    display: inline-block;
+    font-weight: 700;
+    border-radius: 2px;
+
+    padding: .4em;
+    margin-bottom: .3em;
+
+    background: #5da336;
+    color: white;
+}
+.tag::after {
+    content: "(Unknown Tag)";
+}
+
+.tag.project-manager {
+    background: #d7342a;
+}
+.tag.project-manager::after {
+    content: "Project Manager";
+}
+.tag.head-developer {
+    background: #ff5252;
+}
+.tag.head-developer::after {
+    content: "Head Developer";
+}
+.tag.developer {
+    background: #ff6e40;
+}
+.tag.developer::after {
+    content: "Developer";
+}
+.tag.debug-qa {
+    background: #f1c40f;
+}
+.tag.debug-qa::after {
+    content: "Debug and QA";
+}
+.tag.graphics {
+    background: #18ffff;
+}
+.tag.graphics::after {
+    content: "Graphics";
+}
+.tag.game-master-advice {
+    background: #9b59b6;
+}
+.tag.game-master-advice::after {
+    content: "Game-Master Advice";
+}
+.tag.support {
+    background: #69f0ae;
+}
+.tag.support::after {
+    content: "Support";
+}
+.tag.donator {
+    background: #e5d52b;
+}
+.tag.donator::after {
+    content: "Donator";
+}
+
+
+.alerts-sidebar {
+    position: fixed;
+
+    top: 8em;
+    right: 0;
+
+    visibility: hidden;
+    z-index: 99999;
+
+    width: 20vw;
+}
+
+.alert {
+    padding: .7em;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+    border: 1px inset #0003;
+
+    color: black;
+    font-family: Montserrat, sans-serif;
+
+    margin-bottom: 0.2em;
+    position: relative;
+
+    animation: swipe-in-fade-out 15s ease-in-out;
+}
+
+.danger {
+    background: #f27379;
+}
+.warning {
+    background: #fcf875;
+}
+.info {
+    background: #77eff7;
+}
+.success {
+    background: #7af068;
+}
+
+.danger-text {
+    color: #f27379;
+}
+.warning-text {
+    color: #fcf875;
+}
+.info-text {
+    color: #77eff7;
+}
+.success-text {
+    color: #7af068;
+}
+
+@keyframes swipe-in-fade-out {
+    0% {
+        visibility: visible;
+        opacity: 0;
+        left: 20vw;
+    }
+    5% {
+        opacity: 1;
+        left: 0;
+    }
+
+    75% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+
+.link {
+    display: inline-block;
+
+    width: 32px;
+    height: 32px;
+
+    border-radius: 2px;
+
+    background: no-repeat center center;
+}
+
+.link.github {
+    background-image: url(../img/icons/github.png);
+}
+
+.link.forums {
+    background-image: url(../img/icons/forums.png);
+}
+
+.link.youtube {
+    background-image: url(../img/icons/youtube.png);
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 400;
+    font-family: "Patua One", serif;
+
+    text-align: center;
+}
+
+p, li {
+    font-family: Montserrat, sans-serif;
+}
+
+small {
+    opacity: .65;
+}
+
+a {
+    color: #71c13f;
+}
+
+footer {
+    background: #130f40;
+    font-size: .7em;
+    color: #039be5;
+
+    width: calc(100% - 2.8em);
+    padding: 2em 1.4em;
+
+    font-family: Montserrat, serif;
+}
+footer .header {
+    font-family: "Patua One", serif;
+    font-size: 1.3em;
+    text-align: center;
+}
+footer .footer {
+    text-align: center;
+}
+footer .grid {
+    display: grid;
+    grid: repeat(1, 1fr) / auto-flow 1fr;
+
+    width: 20%;
+    margin-left: auto;
+    margin-right: auto;
+
+    text-align: center;
+}
+
+.gold-large {
+    color: #e4e526;
+    font-size: 1.6em;
+}
+
+.bold {
+    font-weight: 700;
+}
+
+.jumbotron.transparent-black {
+    background: transparent;
+    color: black;
+}
+
+.loading {
+    filter: blur(20px);
+    opacity: .5;
+}
+
+@media only screen and (max-width: 1099px) and (min-width: 839px) {
+    nav, nav * {
+        transition: none;
+    }
+
+    nav:not(.scrolled) .title {
+        display: block;
+        width: 100%;
+
+        text-align: center;
+    }
+    nav:not(.scrolled) .title a:hover {
+        left: 0;
+    }
+    nav:not(.scrolled) .title a:hover .logo {
+        opacity: 0;
+    }
+
+    nav:not(.scrolled) .links {
+        width: 100%;
+        margin: 1.2em 0 0;
+    }
+    nav:not(.scrolled) .links a {
+        width: calc(25% - 1px);
+        padding: 1em 0;
+        text-align: center;
+    }
+}
+
+@media only screen and (max-width: 907px) and (min-width: 839px) {
+    nav, nav * {
+        transition: none;
+    }
+
+    nav.scrolled .title {
+        display: block;
+        width: 100%;
+
+        text-align: center;
+    }
+    nav.scrolled .title a:hover {
+        left: 0;
+    }
+    nav.scrolled .title a:hover .logo {
+        opacity: 0;
+    }
+
+    nav.scrolled .links {
+        margin: 1.2em 0 0;
+    }
+}
+
+@media only screen and (max-width: 838px) {
+    nav .links {
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 800px) {
+    footer .grid {
+        width: 50%;
+    }
+}
+
+@media only screen and (max-width: 900px) {
+    .jumbotron {
+        text-align: justify;
+    }
+
+    .content {
+        margin-left: 0;
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .jumbotron {
+        width: calc(100% - 4em);
+        border-radius: 0;
+        margin: 0;
+    }
+}
