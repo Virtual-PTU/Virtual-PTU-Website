@@ -151,9 +151,7 @@
         // load file from Github
         let response;
         try {
-            response = await Promise.resolve($.get(`https://rawgit.com/AssaultBird2454/Virtual-Pokemon-Tabletop/${versionData.Commit_ID}/docs/${fileName}`));
-            //   ||
-            //   v CHROME IS STUPID
+            response = await Promise.resolve($.get(`https://rawgit.com/Virtual-PTU/Virtual-Pokemon-Tabletop/${versionData.Commit_ID}/docs/${fileName}`));
         } catch (e) {
             response = `# 404 Page Not Found
 #### oh whatever you know what \`404\` means...
