@@ -14,8 +14,8 @@
     "gh-pages": "^1.1.0"
   },
   "scripts": {
-    "deploy": "node run build && node_modules/.bin/gh-pages -d build",
-    "build": "node_modules/.bin/bulp"
+    "deploy": "npm run build && node_modules/.bin/gh-pages -d build",
+    "build": "node_modules/.bin/gulp"
   },
   "homepage": "https://virtual-ptu.com"
 }
