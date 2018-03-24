@@ -10,10 +10,12 @@
     "gulp-babel": "^7.0.1",
     "gulp-clean-css": "^3.9.2",
     "gulp-imagemin": "^4.1.0",
-    "gulp-uglify": "^3.0.0"
+    "gulp-uglify": "^3.0.0",
+    "gh-pages": "^1.1.0"
   },
   "scripts": {
-    "travis": "node_modules/.bin/gulp",
-    "build": "npm run travis"
-  }
+    "deploy": "node run build && node_modules/.bin/gh-pages -d build",
+    "build": "node_modules/.bin/bulp"
+  },
+  "homepage": "https://virtual-ptu.com"
 }
