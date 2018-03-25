@@ -15,8 +15,7 @@
     "gulp-htmlmin": "^4.0.0"
   },
   "scripts": {
-    "build": "node_modules/.bin/gulp build",
-    "deploy": "git remote add site https://github.com/Virtual-PTU/virtual-ptu.github.io.git && node_modules/.bin/gulp deploy"
+    "build": "node_modules/.bin/gulp build"
   },
   "homepage": "https://virtual-ptu.com"
 }

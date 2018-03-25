@@ -12,7 +12,6 @@ const gulp = require("gulp"),
     cleancss = require("gulp-clean-css"),
     del = require("del"),
     htmlmin = require("gulp-htmlmin"),
-    ghpages = require("gh-pages"),
     fs = require("fs");
 
 // Clean the output directory
@@ -51,7 +50,7 @@ gulp.task("cname", ["build"], function(cb) {
     fs.copyFile("beta/CNAME", "build/CNAME", cb);
 });
 
-gulp.task("deploy", ["build", "cname"], function(cb) {
+/*gulp.task("deploy", ["build", "cname"], function(cb) {
     ghpages.publish("build", {
         message: "Publish website",
         remote: "site",
@@ -59,6 +58,6 @@ gulp.task("deploy", ["build", "cname"], function(cb) {
         silent: true, // avoid displaying the Github token
         repo: `https://${process.env.GH_TOKEN}@github.com/Virtual-PTU/virtual-ptu.github.io`
     }, cb);
-});
+});*/
 
 gulp.task("build", ["scripts", "images", "css", "html"]);
