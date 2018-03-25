@@ -1,7 +1,15 @@
 ﻿language: node_js
 node_js:
-    - node
+  - node
 script:
-    - 'npm run deploy'
+  - 'npm run build'
+deploy:
+  provider: pages
+  skip-cleanup: true
+  github-token: $GH_TOKEN
+  target-branch: master
+  fqdn: 'www.virtual-ptu.com'
+  repo: 'Virtual-PTU/virtual-ptu.github.io'
+
 # GH_TOKEN=[hidden] - Access token to allow for Github pushing.
 secure: "wlf6jLekEiue7lxmIInb6QlUpvfAIqkQzFaahjrNi49D8c8ZRzJTYPGgX9ZWaOXgiOQYM4GBhjiKSjS/J3UO8u3couDb8VovM1ngAuFTzegbI6yJWmfjfuwfM9I6UgK9bLbOIXYKtWr48Uod+2BLWRqQrG0wTz+LOeI4RIGRfu0XijlgxzgTiruiw4LcuAz+yGfoUWQd2tA+0VasCLlboS1r2ve9cfO1z63JAIw2594lOAFgXV9JEke8a4eFPMQsPA0l4OmpeR/7TvdnN5ox49a8HUI3Jv9UICH2q/KnRgdHdXrJNGgk9w/TBH+upinGje8wLvmFzokF3H7rMHmx3z7LoWXakvzmq85FZWfjRgfXncIB/NJqdFtoguatqjKw3552A+r4dY9i3vXSabFR7zvTrenuYJjmaHgrR0pqMxgh4wn5UUvO6tVHHbKiZCzr+eX8enyMwbFNP5N25tNdLGHWGK405sKGBTQ9iSQM0OhsFuxT8jldAfsjKNn+mO8+cZ3RWnNOhblDI7fI0fQqAx2UR+F9fmwDR1FcEWz77RjxTTJxIynfp8j8BknlGD9VI4i/wd06Md2waHeuJVp+QjC9BCc90u3fDFrT9647SmYLmSupWQ+LBzbWkhhHrY6MkwGkEBVKNH28oCweWc/CShjYWNjLaLEA9LpYcfCr5FQ="
