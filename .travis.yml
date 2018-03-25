@@ -1,8 +1,14 @@
 ﻿language: node_js
 dist: trusty
+sudo: required
+
 addons:
-  chrome: stable
-  firefox: stable
+  firefox: latest
+  apt:
+    sources:
+      - google-chrome
+    packages:
+      - google-chrome-stable fluxbox
 
 node_js:
   - node
@@ -10,6 +16,11 @@ node_js:
 #before_install:
 #  - 'google-chrome-stable --headless --disable-gpu --remote-debugging-port=9222'
 #  - 'firefox -headless --start-debugger-server 6000'
+before_script:
+  - 'export DISPLAY=:99.0'
+  - 'ssh -e /etc/init.d/xvfb start'
+  - 'sleep 3'
+  - 'fluxbox >/dev/null 2>&1 &'
 script:
   - 'npm run test'
 before_deploy:
