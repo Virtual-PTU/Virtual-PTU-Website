@@ -12,10 +12,12 @@
     "gulp-imagemin": "^4.1.0",
     "gulp-uglify": "^3.0.0",
     "gh-pages": "^1.1.0",
-    "gulp-htmlmin": "^4.0.0"
+    "gulp-htmlmin": "^4.0.0",
+    "testcafe": "^0.19.1"
   },
   "scripts": {
-    "build": "node_modules/.bin/gulp build"
+    "build": "node_modules/.bin/gulp build",
+    "test": "node_modules/.bin/testcafe chrome:headless,firefox:headless tests/*.test.js"
   },
   "homepage": "https://virtual-ptu.com"
 }
