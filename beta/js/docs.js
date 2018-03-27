@@ -178,6 +178,8 @@ If it was the last one, why were you typing it into the URL? Use the selector to
         $currentDoc.innerHTML = markdown.renderJsonML(markdown.toHTMLTree(parsed));
 
         $title.textContent = title + " | Virtual PTU";
+
+        $(document).emit("docload");
     }
 
     if (window.location.hash.length <= 1) window.location.hash = "/index";

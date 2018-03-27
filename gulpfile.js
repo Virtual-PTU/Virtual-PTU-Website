@@ -10,7 +10,9 @@ const gulp = require("gulp"),
     uglify = require("gulp-uglify"),
     babel = require("gulp-babel"),
     cleancss = require("gulp-clean-css"),
-    del = require("del");
+    del = require("del"),
+    htmlmin = require("gulp-htmlmin"),
+    fs = require("fs");
 
 // Clean the output directory
 gulp.task("clean", function() {
@@ -18,7 +20,7 @@ gulp.task("clean", function() {
 });
 
 gulp.task("scripts", ["clean"], function() {
-    // Mininify all JS
+    // Mininify all JS and output it
     return gulp.src("beta/js/**/*.js")
         .pipe(babel({presets: ["env"]}))
         .pipe(uglify())
@@ -37,8 +39,25 @@ gulp.task("css", ["clean"], function() {
         .pipe(gulp.dest("build/css"));
 });
 
-gulp.task("deploy", ["scripts", "images", "css"], function() {
-
+gulp.task("html", ["clean"], function() {
+    // Match any HTML files that don't start with an underscore
+    return gulp.src("beta/**/[!_]*.html")
+        .pipe(htmlmin())
+        .pipe(gulp.dest("build"));
 });
 
-gulp.task("default", ["deploy"]);
+gulp.task("cname", ["build"], function(cb) {
+    fs.copyFile("beta/CNAME", "build/CNAME", cb);
+});
+
+/*gulp.task("deploy", ["build", "cname"], function(cb) {
+    ghpages.publish("build", {
+        message: "Publish website",
+        remote: "site",
+        branch: "master",
+        silent: true, // avoid displaying the Github token
+        repo: `https://${process.env.GH_TOKEN}@github.com/Virtual-PTU/virtual-ptu.github.io`
+    }, cb);
+});*/
+
+gulp.task("build", ["scripts", "images", "css", "html"]);
