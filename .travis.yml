@@ -18,7 +18,7 @@ node_js:
 #  - 'firefox -headless --start-debugger-server 6000'
 before_script:
   - 'export DISPLAY=:99.0'
-  - 'ssh -e /etc/init.d/xvfb start'
+  - '/etc/init.d/xvfb start'
   - 'sleep 3'
   - 'fluxbox >/dev/null 2>&1 &'
 script:
