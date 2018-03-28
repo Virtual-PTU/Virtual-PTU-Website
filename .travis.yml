@@ -15,9 +15,14 @@ script:
 before_deploy:
 - npm run build
 deploy:
-  provider: pages
-  skip-cleanup: true
-  github-token: "$GH_TOKEN"
-  target-branch: master
-  fqdn: www.virtual-ptu.com
-  repo: Virtual-PTU/virtual-ptu.github.io
+  - provider: pages
+    skip-cleanup: true
+    github-token: "$GH_TOKEN"
+    target-branch: master
+    fqdn: www.virtual-ptu.com
+    repo: Virtual-PTU/virtual-ptu.github.io
+    local-dir: build
+  - provider: firebase
+    token: "$Firebase_CI_API_Key"
+    message: "Deploy successful"
+    local-dir: build
