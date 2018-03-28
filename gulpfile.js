@@ -29,7 +29,9 @@ gulp.task("scripts", ["clean"], function() {
 
 gulp.task("images", ["clean"], function() {
     return gulp.src("beta/img/**/*.png")
-        .pipe(imagemin({optimizationLevel: 5}))
+        .pipe(imagemin({
+            optimizationLevel: 5
+        }))
         .pipe(gulp.dest("build/img"));
 });
 
@@ -42,7 +44,16 @@ gulp.task("css", ["clean"], function() {
 gulp.task("html", ["clean"], function() {
     // Match any HTML files that don't start with an underscore
     return gulp.src("beta/**/[!_]*.html")
-        .pipe(htmlmin())
+        .pipe(htmlmin({
+            collapseWhitespace: true,
+            minifyCSS: true,
+            minifyJS: true,
+            minifyURLs: true,
+            removeComments: true,
+            removeAttributeQuotes: true,
+            sortAttributes: true,
+            sortClassName: true
+        }))
         .pipe(gulp.dest("build"));
 });
 

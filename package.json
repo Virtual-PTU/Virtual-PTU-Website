@@ -17,7 +17,7 @@
     "http-server": "^0.11.1"
   },
   "scripts": {
-    "build": "node_modules/.bin/gulp build",
+    "build": "dir && node_modules/.bin/gulp build",
     "test": "node_modules/.bin/testcafe chrome:headless,firefox:headless tests/*.test.js --app \"node_modules/.bin/http-server ./beta -s\"",
     "server": "node_modules/.bin/http-server beta"
   },

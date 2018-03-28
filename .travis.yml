@@ -23,5 +23,6 @@ deploy:
     repo: Virtual-PTU/virtual-ptu.github.io
     local-dir: build
   - provider: firebase
+    skip-cleanup: true
     token: "$Firebase_CI_API_Key"
     message: "Deploy successful"
