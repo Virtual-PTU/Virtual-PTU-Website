@@ -31,7 +31,7 @@ If you want to manually test it, run `npm run server` and go to `http://localhos
 The MIT License (MIT)
 
 ```markdown
-Copyright © 2018 <copyright holders>
+Copyright © 2018 Virtual PTU
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
