@@ -15,12 +15,14 @@ script:
 before_deploy:
 - npm run build
 deploy:
-  provider: pages
-  skip-cleanup: true
-  github-token: "$GH_TOKEN"
-  target-branch: master
-  fqdn: www.virtual-ptu.com
-  repo: Virtual-PTU/virtual-ptu.github.io
-env:
-  global:
-    secure: ptO55zgz8BoGwlZPafwD4sACSQ8Muf5Pok+/F5KqbSyJMeTD0/L7gheg6xpi/PNNLpzNkN+Ckp4e0qIJNmsKw2D7a44YfgoFoigQu1AOUgv7onHadi3sWTDHf59xrAdocqnlDh74zP+QfABqm+TRS4Bgr9BAv62xQs+iEgIHwFXb5b+KdUw4pyEsg3TacjrAOrYSvEIlm/gS13W9aEbE93vHBp0+TeJ4bfRuYC+N1AHjCSBP/AryvFs4EmTbJ20RWJbaPwXBMlrsUkgbf9206lFA5dgHcF1979tFNnEnrPb24tDN8kIxYtsGkMNG6p4KPP79Dul3Y5xnSlXm6NMGIx1Mrjo3CXOQ0Y/Eap7dSiHvcMVOAOWwrlG6dMFAsPUFgbtdY3ngflc7FEzwHY2FXKZASrrK+V5ZoaUjhUsnGtD8pDsd0EXczSxwUcU+sscUubSfUbthwlT78DfrnxA7hNXyGq8MkYg/ARZjyvSHQ16qM0ULlo0EIKuzz94vgpVHtbVzXEdXjOyuCJrh3Hu4azQWhWV1Z6u5mOnwv4LDj5Wbojd231ZaZjHMVSoSq8k2mJ67IDcQdHxX2X+9L15jAv6d/0k6bSYobjQWmf/rvBY4EyS09WbulpJ7W3oaolTKLlpCy3rnRJN2aUkBy5gk6ErfShMaDwmBtemvLa+a69Q=
+  - provider: pages
+    skip-cleanup: true
+    github-token: "$GH_TOKEN"
+    target-branch: master
+    fqdn: www.virtual-ptu.com
+    repo: Virtual-PTU/virtual-ptu.github.io
+    local-dir: build
+  - provider: firebase
+    token: "$Firebase_CI_API_Key"
+    message: "Deploy successful"
+    local-dir: build
