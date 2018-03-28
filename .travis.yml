@@ -25,4 +25,3 @@ deploy:
   - provider: firebase
     token: "$Firebase_CI_API_Key"
     message: "Deploy successful"
-    local-dir: build
