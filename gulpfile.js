@@ -22,7 +22,9 @@ gulp.task("clean", function() {
 gulp.task("scripts", ["clean"], function() {
     // Mininify all JS and output it
     return gulp.src("beta/js/**/*.js")
-        .pipe(babel({presets: ["env"]}))
+        .pipe(babel({
+            presets: ["env"]
+        }))
         .pipe(uglify())
         .pipe(gulp.dest("build/js"));
 });

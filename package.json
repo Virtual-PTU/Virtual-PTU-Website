@@ -4,17 +4,18 @@
   "dependencies": {},
   "devDependencies": {
     "babel-core": "^6.26.0",
+    "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.6.1",
     "del": "^3.0.0",
+    "gh-pages": "^1.1.0",
     "gulp": "^3.9.1",
     "gulp-babel": "^7.0.1",
     "gulp-clean-css": "^3.9.2",
+    "gulp-htmlmin": "^4.0.0",
     "gulp-imagemin": "^4.1.0",
     "gulp-uglify": "^3.0.0",
-    "gh-pages": "^1.1.0",
-    "gulp-htmlmin": "^4.0.0",
-    "testcafe": "^0.19.1",
-    "http-server": "^0.11.1"
+    "http-server": "^0.11.1",
+    "testcafe": "^0.19.1"
   },
   "scripts": {
     "build": "dir && node_modules/.bin/gulp build",
