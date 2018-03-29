@@ -33,9 +33,47 @@
     });
     updateInfo.versions.reverse();
     $versionList.addEventListener("change", () => {
-        selectedVersion = parseInt($versionList.value);
-        loadVersionWithDeprecatedMessage(selectedVersion);
+        setSelectedVersion();
+        loadVersionFromHash();
     });
+
+    function getUrlInfo() {
+        const hash = location.hash.substr(1), split = hash.split(":");
+
+        return {
+            hash,
+            version: split[0],
+            path: split[1]
+        }
+    }
+
+    async function setSelectedVersion() {
+        const {path} = getUrlInfo();
+
+        let $chooseVersion = $("#choose-version");
+        if ($chooseVersion.is(":checked")) {
+            let version = parseInt($("#select-version").val());
+            location.hash = `${version}:${path || "index"}`;
+            await loadVersionWithDeprecatedMessage(version);
+            return;
+        }
+
+        let $selectedVersion = $(".sidebar p input[type=radio]:checked"),
+            version = $selectedVersion.val();
+
+        location.hash = `${version}:${path || "index"}`;
+
+        await loadVersionFromHash();
+    }
+
+    async function loadVersionFromHash() {
+        let hash = location.hash.substr(1), {version, path} = getUrlInfo();
+        if (!hash) {
+            location.hash = version + ":index";
+        }
+
+        await loadFromVersion(version, path, Number.isNaN(parseInt(version)));
+    }
 
     async function loadVersionWithDeprecatedMessage(version) {
         await loadFromVersion(selectedVersion, location.hash.substr(1));
@@ -52,27 +90,29 @@
     let versionOptions = Array.from(document.querySelectorAll("[name=version-option]"));
     versionOptions.forEach($el => {
         $el.addEventListener("change", async () => {
-            if ($el.checked && $el.id !== "choose-version") {
-                $versionList.disabled = true;
-                switch ($el.id) {
-                    case "dev-latest":
-                        selectedVersion = "Dev";
-                        break;
-                    case "alpha-latest":
-                        selectedVersion = "Alpha";
-                        break;
-                    case "beta-latest":
-                        selectedVersion = "Beta";
-                        break;
-                    case "master-latest":
-                        selectedVersion = "Master";
-                        break;
-                }
-                await loadFromVersion(selectedVersion, location.hash.substr(1), true);
-            } else {
-                await loadVersionWithDeprecatedMessage(parseInt($versionList.value));
-                $versionList.disabled = null;
-            }
+            await setSelectedVersion();
+            /*
+                        if ($el.checked && $el.id !== "choose-version") {
+                            $versionList.disabled = true;
+                            switch ($el.id) {
+                                case "dev-latest":
+                                    selectedVersion = "Dev";
+                                    break;
+                                case "alpha-latest":
+                                    selectedVersion = "Alpha";
+                                    break;
+                                case "beta-latest":
+                                    selectedVersion = "Beta";
+                                    break;
+                                case "master-latest":
+                                    selectedVersion = "Master";
+                                    break;
+                            }
+                            await loadFromVersion(selectedVersion, location.hash.substr(1), true);
+                        } else {
+                            await loadVersionWithDeprecatedMessage(parseInt($versionList.value));
+                            $versionList.disabled = null;
+                        }*/
         });
     });
 
@@ -89,13 +129,13 @@
 
                 if (parent[0] === "header") {
                     tree[1] = {
-                        href: "#",
+                        href: "javascript:void 0",
                         onclick: `openDialog("https://youtube.com/embed/${videoId}")`
                     };
                     tree[2] = [
                         "small",
                         {},
-                        "(video explanation)"
+                        "[video]"
                     ];
                     return;
                 }
@@ -109,7 +149,7 @@
                     width: "640",
                     height: "360"
                 };
-                tree[2] += " (If this text displays, your browser doesn't support iFrames. WOW.";
+                tree[2] += " (If this text displays, your browser doesn't support iFrames. WOW.)";
             }
 
             return;
@@ -120,8 +160,21 @@
         tree.slice(1).forEach(el => replaceYoutube(el, tree));
     }
 
+    let fadeTime = 150;
     async function loadFromVersion(version, fileName, isBranchName = false) {
+        console.log("Loading", version, fileName + ".md");
+
         let versionData = isBranchName ? {Commit_ID: version} : updateInfo.versions[parseInt(version)];
+
+        let $$currentDoc = $($currentDoc);
+
+        let startHeight = $$currentDoc.height();
+        $$currentDoc.height(startHeight);
+
+        $(".loading", $currentDoc).html(`<p>Initialising page load...</p>`);
+
+        await new Promise(yay => $("article", $$currentDoc).stop().fadeOut(fadeTime, yay));
+        await new Promise(yay => $("div", $$currentDoc).stop().fadeIn(fadeTime, yay));
 
         let dotCount = 2, dotState = false;
         let interval = setInterval(() => {
@@ -137,7 +190,7 @@
                 }
             }
 
-            $currentDoc.innerHTML = `<p>Please wait, the page is loading${".".repeat(dotCount)}</p>`;
+            $(".loading", $currentDoc).html(`<p>Please wait, the page is loading${".".repeat(dotCount)}</p>`);
         }, 250);
 
         // make file name neater
@@ -175,21 +228,23 @@ If it was the last one, why were you typing it into the URL? Use the selector to
         replaceYoutube(parsed);
 
         clearInterval(interval);
-        $currentDoc.innerHTML = markdown.renderJsonML(markdown.toHTMLTree(parsed));
+
+        await new Promise(yay => $("div", $$currentDoc).stop().fadeOut(fadeTime, yay));
+        $("article", $$currentDoc).stop().fadeIn(fadeTime).html(markdown.renderJsonML(markdown.toHTMLTree(parsed)));
+        let height = $$currentDoc.height("auto").height();
+        $$currentDoc.height(startHeight);
+        $$currentDoc.animate({height: height});
 
         $title.textContent = title + " | Virtual PTU";
 
-        $(document).emit("docload");
+        $(document).trigger("docload");
     }
 
-    if (window.location.hash.length <= 1) window.location.hash = "/index";
-    await loadFromVersion(selectedVersion, window.location.hash.substr(1));
+    await setSelectedVersion();
+    await loadVersionFromHash();
     document.body.removeAttribute("class");
 
-    window.addEventListener("hashchange", async () => {
-        if (window.location.hash.length <= 1) window.location.hash = "/index";
-        await loadFromVersion(selectedVersion, window.location.hash.substr(1));
-    });
+    window.addEventListener("hashchange", loadVersionFromHash);
 }());
 
 function openDialog(url) {

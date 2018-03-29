@@ -182,6 +182,11 @@ nav .links a:hover {
     width: calc(calc(100% - 32em) *  0.6321205588285577) !important;
     transition: 150ms ease;
 }
+
+.current-doc .article {
+    background: #f3faff;
+}
+
 .docs-sidebar {
     width: calc(calc(100% - 4em) * 0.36787944117144233);
     padding: 1em;
@@ -414,11 +419,6 @@ footer .grid {
 .jumbotron.transparent-black {
     background: transparent;
     color: black;
-}
-
-.loading {
-    filter: blur(20px);
-    opacity: .5;
 }
 
 @media only screen and (max-width: 1099px) and (min-width: 839px) {
