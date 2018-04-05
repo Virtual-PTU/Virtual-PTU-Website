@@ -4,11 +4,16 @@ function loadScript(src, crossOrigin) {
     $el.crossOrigin = crossOrigin;
 
     console.log("Loading", src);
-    return new Promise(yay => {
+    return new Promise((yay, nay) => {
         $el.onload = () => {
             yay();
             $el.remove();
         };
+        // load timeout
+        setTimeout(() => {
+            nay(new Error("Failed to load " + src));
+            $el.remove();
+        }, 1000);
         document.body.appendChild($el);
     });
 }
@@ -23,8 +28,12 @@ window.onScriptLoadComplete = ()=>{};
 
     Raven.context(async function() {
         if (location.host.split(":")[0] === "localhost") {
-            console.log("Connecting to LiveReload");
-            await loadScript("http://localhost:35729/livereload.js?snipver=1")
+            console.log("Connecting to NoReload");
+            try {
+                await loadScript("http://localhost:16552/noreload.min.js");
+            } catch {
+                console.warn("Could not load NoReload");
+            }
         }
 
         await loadScript("/js/attr-data-folder.js");
