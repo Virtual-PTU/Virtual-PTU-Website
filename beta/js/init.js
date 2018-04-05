@@ -4,11 +4,16 @@ function loadScript(src, crossOrigin) {
     $el.crossOrigin = crossOrigin;
 
     console.log("Loading", src);
-    return new Promise(yay => {
+    return new Promise((yay, nay) => {
         $el.onload = () => {
             yay();
             $el.remove();
         };
+        // load timeout
+        setTimeout(() => {
+            nay(new Error("Failed to load " + src));
+            $el.remove();
+        }, 1000);
         document.body.appendChild($el);
     });
 }
@@ -22,6 +27,15 @@ window.onScriptLoadComplete = ()=>{};
     Raven.config("https://76743b4ab265477f8ffae353cfe192a7@sentry.io/278771").install();
 
     Raven.context(async function() {
+        if (location.host.split(":")[0] === "localhost") {
+            console.log("Connecting to NoReload");
+            try {
+                await loadScript("http://localhost:16552/noreload.min.js");
+            } catch {
+                console.warn("Could not load NoReload");
+            }
+        }
+
         await loadScript("/js/attr-data-folder.js");
         await loadScript("/js/nav.js");
         await loadScript("/js/footer.js");
